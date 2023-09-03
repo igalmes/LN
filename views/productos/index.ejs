@@ -1,12 +1,14 @@
-<h1 class="mb-3">Listado de Productos</h1>
+<h1 class="mb-3">Listado de Productos: </h1>
 <div class="row">
     <% productos.forEach(producto => { %>
         <div class="col-3 mb-3">
             <div class="card">
                 <div class="card-body">
                   <h5 class="card-title"><%= producto.nombre %></h5>
-                  <p class="card-text">...</p>
+                  <p class="card-text">categoria: <%= producto.categoria_id %></p>
                   <a href="/productos/<%= producto.id %>" class="btn btn-primary">Ver detalles</a>
+                  <td><img width="100" src="/uploads/producto_<%= producto.id %>.jpg" alt="<%= producto.nombre %>"></td>
+                  <td>
                 </div>
             </div>
         </div>

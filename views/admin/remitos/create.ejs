@@ -1,0 +1,10 @@
+<h1>Ingrese número de carga y descarga Remito</h1>
+
+<div class="row justify-content-center">
+<div class="col-6">
+<!-- sin el enctype no se envia el archivo / file -->
+    <form action="/admin/remitos/store" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="numero" class="form-label">Numero: </label>
+            <input type="text" class="form-control" id="numero" name="numero">
+        </div>

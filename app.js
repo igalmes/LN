@@ -68,6 +68,7 @@ const isJWTLogin = (req, res, next) => {
 app.use(require('./routes/index'));
 app.use(require('./routes/productos'));
 app.use(require('./routes/contacto'));
+app.use(require('./routes/chofer'))
 
 
 //desp del middlework la capa se muestra asi
