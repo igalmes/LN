@@ -1,16 +1,16 @@
-require('dotenv').config()
+// require('dotenv').config()
 
-const mysql = require('mysql');
+// const mysql = require('mysql');
 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DD_PASS,
-    database: process.env.DB_NAME,
-});
+// const connection = mysql.createConnection({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: process.env.DD_PASS,
+//     database: process.env.DB_NAME,
+// });
 
-connection.connect(error => {
-    if (error) { throw error }
-});
+// connection.connect(error => {
+//     if (error) { throw error }
+// });
 
-module.exports = connection;
+// module.exports = connection;

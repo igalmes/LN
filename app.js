@@ -88,9 +88,6 @@ const port = process.env.PORT || 80;
 
 // app.use(require('./router'));
 
-app.use((req, res, next) => {
-    res.status(404).send('Not found');
-});
 
 app.listen(port, async () => {
     console.log(`http://localhost:${port}`);
@@ -101,4 +98,8 @@ app.listen(port, async () => {
     } catch(error) {
         console.error('Unable to connect to the database', error);
     }
+});
+
+app.use((req, res, next) => {
+    res.status(404).send('Not found');
 });
