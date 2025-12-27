@@ -1,0 +1,60 @@
+<h1 class="mb-4">Lista de Empleados</h1>
+
+<style>
+  .empleados-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .empleado-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    padding: 20px;
+    width: 220px;
+  }
+
+  .empleado-card h3 {
+    margin: 0 0 10px;
+  }
+
+  .empleado-card p {
+    margin: 5px 0;
+  }
+
+  .acciones {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+</style>
+
+<div class="empleados-container">
+  <% if (empleados.length > 0) { %>
+
+    <% empleados.forEach(emp => { %>
+      <div class="empleado-card">
+        <h3><%= emp.nombre %> <%= emp.apellido %></h3>
+
+        <p><strong>DNI:</strong> <%= emp.dni %></p>
+        <p><strong>CUIT:</strong> <%= emp.cuit %></p>
+
+        <div class="acciones">
+          <a href="/empleado/<%= emp.id %>" 
+             class="btn btn-outline-primary btn-sm">
+            Ver detalle
+          </a>
+
+          <a href="/empleado/<%= emp.id %>/edit" 
+             class="btn btn-outline-warning btn-sm">
+            Modificar
+          </a>
+        </div>
+      </div>
+    <% }) %>
+
+  <% } else { %>
+    <p>No hay empleados cargados.</p>
+  <% } %>
+</div>

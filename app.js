@@ -70,6 +70,11 @@ app.use(require('./routes/productos'));
 app.use(require('./routes/contacto'));
 app.use(require('./routes/chofer'))
 
+app.use('/empleado', require('./routes/empleado'));
+
+
+
+
 
 //desp del middlework la capa se muestra asi
 app.use('/admin', isLogin, require('./routes/admin/productos'));
@@ -94,7 +99,7 @@ app.listen(port, async () => {
 
     try {
         await sequelize.sync();
-        console.log('Connection has been established successfully.');
+        console.log('Connection to the database has been established successfully.');
     } catch(error) {
         console.error('Unable to connect to the database', error);
     }

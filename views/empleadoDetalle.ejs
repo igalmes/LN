@@ -1,0 +1,20 @@
+<h2>Unidades asignadas</h2>
+
+<ul>
+<% if (empleado.Unidads && empleado.Unidads.length > 0) { %>
+  <% empleado.Unidads.forEach(u => { %>
+    <li>
+      <strong><%= u.marca %> - <%= u.modelo %></strong><br>
+      Patente: <%= u.patente %><br>
+      Desde: <%= u.EmpleadoUnidad.fecha_inicio %><br>
+      <% if (u.EmpleadoUnidad.fecha_fin) { %>
+        Hasta: <%= u.EmpleadoUnidad.fecha_fin %>
+      <% } else { %>
+        <em>(Unidad actual)</em>
+      <% } %>
+    </li>
+  <% }) %>
+<% } else { %>
+  <li>No hay unidades asignadas</li>
+<% } %>
+</ul>

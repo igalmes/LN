@@ -1,0 +1,32 @@
+<h1>Editar empleado</h1>
+
+<form action="/empleado/<%= empleado.id %>/edit" method="POST">
+
+  <div class="mb-3">
+    <label>Nombre</label>
+    <input type="text" name="nombre" class="form-control"
+           value="<%= empleado.nombre %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label>Apellido</label>
+    <input type="text" name="apellido" class="form-control"
+           value="<%= empleado.apellido %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label>DNI</label>
+    <input type="text" name="dni" class="form-control"
+           value="<%= empleado.dni %>">
+  </div>
+
+  <div class="mb-3">
+    <label>CUIT</label>
+    <input type="text" name="cuit" class="form-control"
+           value="<%= empleado.cuit %>">
+  </div>
+
+  <button class="btn btn-primary">Guardar cambios</button>
+  <a href="/empleado" class="btn btn-secondary">Cancelar</a>
+
+</form>
