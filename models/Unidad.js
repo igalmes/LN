@@ -1,12 +1,15 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db2');
 
-const Unidad = sequelize.define('Unidad', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  patente: { type: DataTypes.STRING, allowNull: false, unique: true },
-  modelo: { type: DataTypes.STRING },
-  marca: { type: DataTypes.STRING }
+class Unidad extends Model {}
+
+Unidad.init({
+  patente: DataTypes.STRING,
+  modelo: DataTypes.STRING,
+  marca: DataTypes.STRING
 }, {
+  sequelize,
+  modelName: 'Unidad',
   tableName: 'Unidad',
   timestamps: false
 });

@@ -1,0 +1,49 @@
+<h1>Repuestos</h1>
+<a href="/repuestos/nuevo" class="btn btn-primary mb-3">Nuevo repuesto</a>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th>Marca</th>
+      <th>Categoria</th>
+      <th>Proveedor</th>
+      <th>Stock</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% repuestos.forEach(r => { %>
+      <tr>
+        <td><%= r.codigo %></td>
+        <td><%= r.nombre %></td>
+        <td><%= r.marca %></td>
+        <td><%= r.Categoria ? r.Categoria.nombre : '' %></td>
+        <td><%= r.Proveedor ? r.Proveedor.nombre : '' %></td>
+        <td>
+          <%= r.stock_actual %>
+          <% if (r.stock_actual <= r.stock_minimo) { %>
+            <span class="text-danger">(Bajo)</span>
+          <% } %>
+        </td>
+        <td>
+          <a href="/repuestos/editar/<%= r.id %>" class="btn btn-sm btn-warning">Editar</a>
+          <form action="/repuestos/eliminar/<%= r.id %>" method="POST" style="display:inline;">
+            <button class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+          <!-- Movimientos -->
+          <form action="/repuestos/movimiento/<%= r.id %>" method="POST" style="display:inline;">
+            <input type="number" name="cantidad" placeholder="Cant" style="width:60px;" required>
+            <select name="tipo">
+              <option value="ENTRADA">Entrada</option>
+              <option value="SALIDA">Salida</option>
+            </select>
+            <input type="text" name="referencia" placeholder="Ref" required>
+            <button class="btn btn-sm btn-info">Agregar</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

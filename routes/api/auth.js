@@ -13,7 +13,7 @@ router.post('/login', (req, res) => {
         if (error) { throw error }
         
         if (results.length == 0 || !(await bcryptjs.compare(req.body.password, results[0].password))) {
-            res.json({ error: 'El correo y/o la constraseña son incorrectos'});
+            res.json({ error: 'El correo caco la constraseña son incorrectos'});
         } else {
             const payload = { user_id: results[0].id }
             const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '1h' });
@@ -22,7 +22,7 @@ router.post('/login', (req, res) => {
         }
     });
     } else {
-            res.json({ error: 'El correo y/o la constraseña son incorrectos'});
+            res.json({ error: 'El correo caco la constraseña son incorrectos'});
     }
     
 });

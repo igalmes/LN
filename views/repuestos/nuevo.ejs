@@ -1,0 +1,28 @@
+<h1>Nuevo Repuesto</h1>
+
+<form action="/repuestos/nuevo" method="POST">
+  <input type="text" name="codigo" placeholder="Codigo" required class="form-control mb-2">
+  <input type="text" name="nombre" placeholder="Nombre" required class="form-control mb-2">
+  <input type="text" name="marca" placeholder="Marca" class="form-control mb-2">
+
+  <select name="categoria_id" class="form-control mb-2" required>
+    <option value="">Seleccione categoria</option>
+    <% categorias.forEach(c => { %>
+      <option value="<%= c.id %>"><%= c.nombre %></option>
+    <% }) %>
+  </select>
+
+  <select name="proveedor_id" class="form-control mb-2" required>
+    <option value="">Seleccione proveedor</option>
+    <% proveedores.forEach(p => { %>
+      <option value="<%= p.id %>"><%= p.nombre %></option>
+    <% }) %>
+  </select>
+
+  <input type="number" name="stock_minimo" placeholder="Stock mínimo" class="form-control mb-2">
+  <input type="number" name="precio_compra" placeholder="Precio compra" class="form-control mb-2">
+  <input type="number" name="precio_venta" placeholder="Precio venta" class="form-control mb-2">
+  <input type="text" name="ubicacion" placeholder="Ubicación" class="form-control mb-2">
+
+  <button class="btn btn-primary">Guardar</button>
+</form>

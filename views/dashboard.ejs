@@ -1,0 +1,51 @@
+<h1>📊 Dashboard</h1>
+
+<div style="display:flex; gap:20px; margin-bottom:30px;">
+  <div class="card">👤 Empleados<br><b><%= totalEmpleados %></b></div>
+  <div class="card">🚚 Unidades<br><b><%= totalUnidades %></b></div>
+  <div class="card">🔗 Asignados<br><b><%= empleadosConUnidad %></b></div>
+  <div class="card">❌ Sin unidad<br><b><%= empleadosSinUnidad %></b></div>
+</div>
+
+<hr>
+
+<h2>Detalle de empleados</h2>
+
+<table border="1" cellpadding="8" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Empleado</th>
+      <th>DNI</th>
+      <th>CUIT</th>
+      <th>Unidad</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% empleados.forEach(e => { %>
+      <tr>
+        <td><%= e.apellido %>, <%= e.nombre %></td>
+        <td><%= e.dni %></td>
+        <td><%= e.cuit %></td>
+        <td>
+          <% if (e.Unidads.length > 0) { %>
+            <% e.Unidads.forEach(u => { %>
+              <div>
+                <%= u.patente %> - <%= u.marca %> <%= u.modelo %>
+              </div>
+            <% }) %>
+          <% } else { %>
+            —
+          <% } %>
+        </td>
+        <td>
+          <% if (e.Unidads.length > 0) { %>
+            ✅ Asignado
+          <% } else { %>
+            ❌ Sin unidad
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

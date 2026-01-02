@@ -1,0 +1,29 @@
+<h1>Asignar Unidad a <%= empleado.nombre %> <%= empleado.apellido %></h1>
+
+<form action="/empleado/<%= empleado.id %>/asignar-unidad" method="POST">
+  <div class="mb-3">
+    <label for="unidad_id" class="form-label">Unidad</label>
+    <select name="unidad_id" id="unidad_id" class="form-control" required>
+      <option value="">-- Seleccione una unidad --</option>
+      <% unidades.forEach(unidad => { %>
+        <option value="<%= unidad.id %>">
+          <%= unidad.patente %> - <%= unidad.marca %> <%= unidad.modelo %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+    <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="fecha_fin" class="form-label">Fecha Fin</label>
+    <input type="date" name="fecha_fin" id="fecha_fin" class="form-control">
+    <small class="text-muted">Opcional</small>
+  </div>
+
+  <button type="submit" class="btn btn-success">Asignar Unidad</button>
+  <a href="/empleado" class="btn btn-secondary">Cancelar</a>
+</form>

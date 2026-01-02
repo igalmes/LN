@@ -8,15 +8,19 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- LINKS CENTRALES -->
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
           <a class="nav-link active" href="/">Inicio</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/empleado">Empleados</a>
-        </li>
+        <% if (user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/empleado">Empleados</a>
+          </li>
+        <% } %>
 
         <li class="nav-item">
           <a class="nav-link" href="/productos">Productos</a>
@@ -26,11 +30,41 @@
           <a class="nav-link" href="/contacto">Contacto</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/productos">Admin</a>
-        </li>
+        <% if (user && user.rol === 'admin') { %>
+          <li class="nav-item">
+            <a class="nav-link text-danger fw-bold" href="/admin/productos">
+              Admin
+            </a>
+          </li>
+        <% } %>
 
       </ul>
+
+      <!-- LOGIN / USER -->
+      <ul class="navbar-nav ms-auto">
+
+        <% if (!user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/registro">Registrarse</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <span class="nav-link">
+              👤 <%= user.email %>
+            </span>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="/logout">Logout</a>
+          </li>
+        <% } %>
+
+      </ul>
+
     </div>
   </div>
 </nav>

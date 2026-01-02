@@ -1,19 +1,21 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db2');
 
-const Categoria = sequelize.define('Categoria', {
+const Proveedor = sequelize.define('Proveedor', {
   nombre: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  descripcion: DataTypes.STRING,
+  contacto: DataTypes.STRING,
+  telefono: DataTypes.STRING,
+  email: DataTypes.STRING,
   activo: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
   }
 }, {
-  tableName: 'categorias',
+  tableName: 'proveedores',
   timestamps: false
 });
 
-module.exports = Categoria;
+module.exports = Proveedor;

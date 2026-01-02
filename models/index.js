@@ -1,56 +1,17 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASS,
-  {
-    host: process.env.DB_HOST,
-    dialect: 'mysql'
-  }
-);
+const sequelize = require('../db2');
 
-// 🔹 IMPORTO CLASES
+const Usuario = require('./Usuario');
 const Empleado = require('./Empleado');
 const Unidad = require('./Unidad');
 const EmpleadoUnidad = require('./EmpleadoUnidad');
+const Categoria = require('./Categoria');
+const Proveedor = require('./Proveedor');
+const Repuesto = require('./Repuesto');
+const MovimientoStock = require('./MovimientoStock');
+// =======================
+// RELACIONES
+// =======================
 
-// 🔹 INICIALIZO MODELOS
-Empleado.init({
-  nombre: DataTypes.STRING,
-  apellido: DataTypes.STRING,
-  dni: DataTypes.STRING,
-  cuit: DataTypes.STRING
-}, {
-  sequelize,
-  modelName: 'Empleado',
-  tableName: 'Empleado',
-  timestamps: false
-});
-
-Unidad.init({
-  patente: DataTypes.STRING,
-  modelo: DataTypes.STRING,
-  marca: DataTypes.STRING
-}, {
-  sequelize,
-  modelName: 'Unidad',
-  tableName: 'Unidad',
-  timestamps: false
-});
-
-EmpleadoUnidad.init({
-  empleado_id: DataTypes.INTEGER,
-  unidad_id: DataTypes.INTEGER,
-  fecha_inicio: DataTypes.DATEONLY,
-  fecha_fin: DataTypes.DATEONLY
-}, {
-  sequelize,
-  modelName: 'EmpleadoUnidad',
-  tableName: 'EmpleadoUnidad',
-  timestamps: false
-});
-
-// 🔹 RELACIONES
 Empleado.belongsToMany(Unidad, {
   through: EmpleadoUnidad,
   foreignKey: 'empleado_id'
@@ -61,10 +22,25 @@ Unidad.belongsToMany(Empleado, {
   foreignKey: 'unidad_id'
 });
 
-// 🔹 EXPORTO
+
+
+Categoria.hasMany(Repuesto, { foreignKey: 'categoria_id' });
+Repuesto.belongsTo(Categoria, { foreignKey: 'categoria_id' });
+
+Proveedor.hasMany(Repuesto, { foreignKey: 'proveedor_id' });
+Repuesto.belongsTo(Proveedor, { foreignKey: 'proveedor_id' });
+
+Repuesto.hasMany(MovimientoStock, { foreignKey: 'repuesto_id' });
+MovimientoStock.belongsTo(Repuesto, { foreignKey: 'repuesto_id' });
+
 module.exports = {
   sequelize,
+  Usuario,
   Empleado,
   Unidad,
-  EmpleadoUnidad
+  EmpleadoUnidad,
+  Categoria,
+  Proveedor,
+  Repuesto,
+  MovimientoStock
 };

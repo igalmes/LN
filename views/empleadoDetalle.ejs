@@ -1,20 +1,57 @@
-<h2>Unidades asignadas</h2>
+<h1>
+  <%= empleado.nombre %> <%= empleado.apellido %>
+</h1>
 
-<ul>
-<% if (empleado.Unidads && empleado.Unidads.length > 0) { %>
+<p><strong>DNI:</strong> <%= empleado.dni %></p>
+<p><strong>CUIT:</strong> <%= empleado.cuit %></p>
+
+<hr>
+
+<h4>Unidades asignadas</h4>
+
+<% if (empleado.Unidads.length === 0) { %>
+  <p class="text-muted">Este empleado no tiene unidades asignadas</p>
+<% } %>
+
+<ul class="list-group">
   <% empleado.Unidads.forEach(u => { %>
-    <li>
-      <strong><%= u.marca %> - <%= u.modelo %></strong><br>
-      Patente: <%= u.patente %><br>
-      Desde: <%= u.EmpleadoUnidad.fecha_inicio %><br>
-      <% if (u.EmpleadoUnidad.fecha_fin) { %>
-        Hasta: <%= u.EmpleadoUnidad.fecha_fin %>
-      <% } else { %>
-        <em>(Unidad actual)</em>
+    <li class="list-group-item">
+
+      <strong>
+        <%= u.marca %> <%= u.modelo %> – <%= u.patente %>
+      </strong>
+
+      <br>
+
+      <small class="text-muted">
+        Desde <%= u.EmpleadoUnidad.fecha_inicio %>
+        <% if (u.EmpleadoUnidad.fecha_fin) { %>
+          hasta <%= u.EmpleadoUnidad.fecha_fin %>
+        <% } else { %>
+          (activa)
+        <% } %>
+      </small>
+
+      <% if (!u.EmpleadoUnidad.fecha_fin) { %>
+        <form
+          action="/empleado/<%= empleado.id %>/unidad/<%= u.id %>?_method=PUT"
+          method="POST"
+          class="mt-2"
+          onsubmit="return confirm('¿Quitar esta unidad?');"
+        >
+          <button class="btn btn-outline-danger btn-sm">
+            Quitar unidad
+          </button>
+        </form>
       <% } %>
+
     </li>
   <% }) %>
-<% } else { %>
-  <li>No hay unidades asignadas</li>
-<% } %>
 </ul>
+
+<hr>
+
+<a href="/empleado" class="btn btn-secondary mt-3">
+  ← Volver al listado
+</a>
+

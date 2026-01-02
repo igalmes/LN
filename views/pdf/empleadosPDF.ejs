@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte de Empleados</title>
+  <style>
+    body { font-family: Arial; font-size: 12px; }
+    h1 { text-align: center; }
+    .metrics { margin-bottom: 20px; }
+    .empleado {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+    }
+    .unidad {
+      margin-left: 15px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Reporte de Empleados</h1>
+
+<div class="metrics">
+  <strong>Total empleados:</strong> <%= totalEmpleados %><br>
+  <strong>Con unidad:</strong> <%= conUnidad %><br>
+  <strong>Sin unidad:</strong> <%= sinUnidad %>
+</div>
+
+<% empleados.forEach(e => { %>
+  <div class="empleado">
+    <strong><%= e.apellido %>, <%= e.nombre %></strong><br>
+    DNI: <%= e.dni %> | CUIT: <%= e.cuit %>
+
+    <% if (e.Unidads.length > 0) { %>
+      <% e.Unidads.forEach(u => { %>
+        <div class="unidad">
+          🚚 <%= u.marca %> <%= u.modelo %> – <%= u.patente %><br>
+          Desde: <%= u.EmpleadoUnidad.fecha_inicio %>
+          <% if (u.EmpleadoUnidad.fecha_fin) { %>
+            | Hasta: <%= u.EmpleadoUnidad.fecha_fin %>
+          <% } %>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <div class="unidad">❌ Sin unidad asignada</div>
+    <% } %>
+  </div>
+<% }) %>
+
+</body>
+</html>
