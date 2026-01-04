@@ -1,0 +1,61 @@
+<h1>Editar cambio de repuesto</h1>
+
+<form action="/cambios-repuestos/editar/<%= cambio.id %>?_method=PUT" method="POST">
+
+  <!-- UNIDAD -->
+  <div class="mb-3">
+    <label class="form-label">Unidad</label>
+    <select name="unidad_id" class="form-select" required>
+      <% unidades.forEach(unidad => { %>
+        <option value="<%= unidad.id %>"
+          <%= unidad.id === cambio.unidad_id ? 'selected' : '' %>>
+          <%= unidad.patente || ('Unidad #' + unidad.id) %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <!-- REPUESTO -->
+  <div class="mb-3">
+    <label class="form-label">Repuesto</label>
+    <select name="repuesto_id" class="form-select" required>
+      <% repuestos.forEach(repuesto => { %>
+        <option value="<%= repuesto.id %>"
+          <%= repuesto.id === cambio.repuesto_id ? 'selected' : '' %>>
+          <%= repuesto.nombre %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <!-- FECHA -->
+  <div class="mb-3">
+    <label class="form-label">Fecha</label>
+    <input type="date" name="fecha" class="form-control"
+           value="<%= cambio.fecha %>" required>
+  </div>
+
+  <!-- KM -->
+  <div class="mb-3">
+    <label class="form-label">Kilómetros</label>
+    <input type="number" name="km_unidad" class="form-control"
+           value="<%= cambio.km_unidad %>">
+  </div>
+
+  <!-- SERVICE -->
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" name="es_service"
+      <%= cambio.es_service ? 'checked' : '' %>>
+    <label class="form-check-label">Corresponde a service</label>
+  </div>
+
+  <!-- OBSERVACIONES -->
+  <div class="mb-3">
+    <label class="form-label">Observaciones</label>
+    <textarea name="observaciones" class="form-control" rows="4"><%= cambio.observaciones %></textarea>
+  </div>
+
+  <button class="btn btn-primary">Guardar cambios</button>
+  <a href="/cambios-repuestos" class="btn btn-secondary">Cancelar</a>
+
+</form>

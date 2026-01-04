@@ -1,0 +1,28 @@
+<h1>Unidades</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Número</th>
+      <th>Patente</th>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% unidades.forEach(unidad => { %>
+      <tr>
+        <td><%= unidad.numero || '—' %></td>
+        <td><%= unidad.patente || '—' %></td>
+        <td><%= unidad.marca || '—' %></td>
+        <td><%= unidad.modelo || '—' %></td>
+        <td>
+          <a href="/unidades/editar/<%= unidad.id %>" class="btn btn-sm btn-warning">
+            Editar
+          </a>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

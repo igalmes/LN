@@ -1,0 +1,110 @@
+
+
+<div class="container mt-4">
+
+  <h2 class="mb-4">Registrar cambio de repuesto</h2>
+
+  <form action="/cambios-repuestos" method="POST">
+
+    <!-- =======================
+         UNIDAD
+    ======================== -->
+    <div class="mb-3">
+      <label class="form-label">Unidad</label>
+      <select name="unidad_id" class="form-select" required>
+        <option value="">Seleccione una unidad</option>
+        <% unidades.forEach(unidad => { %>
+          <option value="<%= unidad.id %>">
+            <%= unidad.patente || unidad.nombre || ('Unidad #' + unidad.id) %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <!-- =======================
+         REPUESTO (UNO SOLO)
+    ======================== -->
+    <div class="mb-3">
+      <label class="form-label">Repuesto</label>
+      <select name="repuesto_id" class="form-select" required>
+        <option value="">Seleccione un repuesto</option>
+        <% repuestos.forEach(repuesto => { %>
+          <option value="<%= repuesto.id %>">
+            <%= repuesto.codigo ? `[${repuesto.codigo}] ` : '' %>
+            <%= repuesto.nombre %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <!-- =======================
+         FECHA
+    ======================== -->
+    <div class="mb-3">
+      <label class="form-label">Fecha del cambio</label>
+      <input
+        type="date"
+        name="fecha"
+        class="form-control"
+        required
+      >
+    </div>
+
+    <!-- =======================
+         KM UNIDAD
+    ======================== -->
+    <div class="mb-3">
+      <label class="form-label">Kilómetros de la unidad</label>
+      <input
+        type="number"
+        name="km_unidad"
+        class="form-control"
+        min="0"
+        placeholder="Ej: 120000"
+      >
+    </div>
+
+    <!-- =======================
+         SERVICE
+    ======================== -->
+    <div class="form-check mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        name="es_service"
+        value="1"
+        id="es_service"
+      >
+      <label class="form-check-label" for="es_service">
+        Corresponde a service
+      </label>
+    </div>
+
+    <!-- =======================
+         OBSERVACIONES
+    ======================== -->
+    <div class="mb-3">
+      <label class="form-label">Observaciones</label>
+      <textarea
+        name="observaciones"
+        class="form-control"
+        rows="4"
+        placeholder="Detalle del cambio, motivo, observaciones..."
+      ></textarea>
+    </div>
+
+    <!-- =======================
+         BOTONES
+    ======================== -->
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-primary">
+        Guardar cambio
+      </button>
+
+      <a href="/cambios-repuestos" class="btn btn-secondary">
+        Cancelar
+      </a>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,83 @@
+<h1>Cambios de repuestos</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <a href="/cambios-repuestos/nuevo" class="btn btn-primary">
+    + Nuevo cambio
+  </a>
+  </div>
+
+<table class="table table-striped table-hover" id="tablaRepuestos">
+  <thead>
+    <tr>
+      <th style="cursor:pointer" onclick="sortTable(0)">Fecha ↕</th>
+      <th style="cursor:pointer" onclick="sortTable(1)">Unidad ↕</th>
+      <th>Repuesto</th>
+      <th>Empleado</th>
+      <th>KM</th>
+      <th>Service</th>
+      <th class="text-center">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cambios.forEach(cambio => { %>
+      <tr>
+        <td><%= cambio.fecha %></td>
+        <td><%= cambio.Unidad?.patente %></td>
+        <td><%= cambio.Repuesto?.nombre %></td>
+        <td><%= cambio.Empleado?.nombre || '—' %></td>
+        <td><%= cambio.km_unidad %></td>
+        <td><%= cambio.es_service ? '✔' : '—' %></td>
+        <td class="text-center">
+          <a href="/cambios-repuestos/editar/<%= cambio.id %>" class="btn btn-sm btn-warning" title="Editar">
+            ✏️
+          </a>
+          
+          <form action="/cambios-repuestos/eliminar/<%= cambio.id %>?_method=DELETE" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?')">
+            <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
+              🗑️
+            </button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("tablaRepuestos");
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>

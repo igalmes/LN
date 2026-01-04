@@ -1,70 +1,83 @@
-<!-- Vista del Menu de Navegacion -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Los Novillos</a>
+    <a class="navbar-brand" href="/">LN</a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLN">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarLN">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-      <!-- LINKS CENTRALES -->
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-
+        <!-- PUBLICO -->
         <li class="nav-item">
-          <a class="nav-link active" href="/">Inicio</a>
+          <a class="nav-link" href="/">Inicio</a>
         </li>
 
         <% if (user) { %>
+
+          <!-- DASHBOARD -->
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard">Dashboard</a>
+          </li>
+
+          <!-- EMPLEADOS -->
           <li class="nav-item">
             <a class="nav-link" href="/empleado">Empleados</a>
           </li>
-        <% } %>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/productos">Productos</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/contacto">Contacto</a>
-        </li>
-
-        <% if (user && user.rol === 'admin') { %>
+          <!-- UNIDADES -->
           <li class="nav-item">
-            <a class="nav-link text-danger fw-bold" href="/admin/productos">
-              Admin
-            </a>
+            <a class="nav-link" href="/unidades">Unidades</a>
           </li>
-        <% } %>
 
+          <!-- CAMBIOS DE REPUESTOS -->
+          <li class="nav-item">
+            <a class="nav-link" href="/cambios-repuestos">Cambios de repuestos</a>
+          </li>
+
+          <!-- PRODUCTOS -->
+          <li class="nav-item">
+            <a class="nav-link" href="/productos">Productos</a>
+          </li>
+
+          <!-- ADMIN -->
+          <% if (user.rol === 'admin') { %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Admin
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/admin/productos">Productos</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/admin/categorias">Categorías</a>
+                </li>
+              </ul>
+            </li>
+          <% } %>
+
+        <% } %>
       </ul>
 
-      <!-- LOGIN / USER -->
+      <!-- DERECHA -->
       <ul class="navbar-nav ms-auto">
-
-        <% if (!user) { %>
+        <% if (user) { %>
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <span class="navbar-text me-3">
+              <%= user.email %>
+            </span>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link" href="/registro">Registrarse</a>
+            <a class="nav-link text-danger" href="/logout">Salir</a>
           </li>
         <% } else { %>
           <li class="nav-item">
-            <span class="nav-link">
-              👤 <%= user.email %>
-            </span>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link text-danger" href="/logout">Logout</a>
+            <a class="nav-link" href="/login">Login</a>
           </li>
         <% } %>
-
       </ul>
-
     </div>
   </div>
 </nav>

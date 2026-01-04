@@ -85,6 +85,8 @@ app.use('/', require('./routes/index'));
 app.use('/productos', require('./routes/productos'));
 app.use('/contacto', require('./routes/contacto'));
 app.use('/chofer', require('./routes/chofer'));
+app.use('/unidades', require('./routes/unidad'));
+
 
 // ============================
 // RUTAS PROTEGIDAS (dashboard y demás)
@@ -94,6 +96,8 @@ app.use('/repuestos', isLogin, require('./routes/repuestos'));
 app.use('/empleado', isLogin, require('./routes/empleado'));
 app.use('/admin/productos', isLogin, require('./routes/admin/productos'));
 app.use('/admin/categorias', isLogin, require('./routes/admin/categorias'));
+app.use('/cambios-repuestos', require('./routes/cambioRepuesto'));
+
 
 // ============================
 // API
